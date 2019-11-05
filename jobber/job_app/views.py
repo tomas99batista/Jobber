@@ -9,9 +9,7 @@ from job_app.forms import URF, UserUpdateForm, ProfileUpdateForm, Createjob
 
 import logging
 
-
 # Create your views here.
-
 
 def main(request):
     return render(request, "index.html")

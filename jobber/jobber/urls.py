@@ -19,6 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from job_app import urls as user_views
 from django.contrib.auth import views as auth_views
+from templates import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
