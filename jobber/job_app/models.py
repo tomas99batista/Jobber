@@ -47,7 +47,6 @@ class Emprego(models.Model):
     publisher = models.ForeignKey(Empresa, on_delete=models.CASCADE)
     location = models.IntegerField(choices=LOCATION)    # Professional Details
     job_sector = models.IntegerField(choices=JOB_SECTOR)  # IT, Economy
-    #experience_level = models.IntegerField(choices=EXPERIENCE_LEVEL, default=1)
     file = models.FileField(blank=True)  # Can post a PDF with more details of the job, but it's totally optional
 
     def __str__(self):
