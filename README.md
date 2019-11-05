@@ -8,7 +8,7 @@ Jobber é um website para procurar e publicar ofertas de emprego.
 
 #### - Visualizar, Inserir Detalhes e Atualizar Perfil Utilizador
 
-#### - Publicar ofertas de emprego (Necessita de estar registado e loggado)
+#### - Publicar ofertas de emprego (Necessita estar registado e loggado)
 
 #### - Procurar ofertas de emprego, filtrando por:
 
