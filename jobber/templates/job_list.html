@@ -1,11 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="mb-5" data-scrollax=" properties: { translateY: '70%' }">
-        <div class="container " >
+        <div class="container" style = "margin-bottom: 100px"  >
             <p class="mb-5 mt-5 pt-5" data-scrollax="properties: { translateY: '30%', opacity: 1.6 } ">
                 <h5 style="color:#FFFFFF">RESULTS FOR:
-                    {% if ALL %}
-                        <strong>ALL</strong>
                     {% if not NoTitle %}
                         <strong>"{{ title }}"</strong>
                     {% endif %}
@@ -21,37 +19,11 @@
                         {% endif %}
                         <strong>{{ location }}</strong>
                     {% endif %}
-                    {% endif %}
                 </h5>
             </p>
     <section id="first-tab-group" class="tabgroup">
-    {% if ALL %}
-        {% for t in empregos %}
-        <div style="background-color:#FFFFFF;
-                                            border-radius: 25px;
-                                            width:750px" class="tab active p-4 ">
-            <ul>
-                <li>
-                      <div class="item row">
-                        <div class="col-md-15 p-2">
-                             <h4>{{ t.title }}</h4>
-                                <span>Category: <strong>{{ categories.0.1 }}</strong></span>
-                                <span><strong>{{ location.0.1 }}</strong></span>
-                                <p>Description: {{ t.description }}</p>
-                            <div class="accent-button button">
-                                 <a href="#contact">Continue Reading</a>
-                            </div>
-                        </div>
-                          <div class="col-md-15 pl-5">
-                          <img src="../static/images/person_1.jpg" style="border-radius: 25px; height: 200px" alt="">
-                        </div>
-                      </div>
-                </li>
-            </ul>
-        </div>
-    {% endfor %}
-    <!-- Just Title -->
-    {% elif NoCategory and NoLocation and not NoTitle %}
+
+
         {% for t in jobs %}
         <div style="background-color:#FFFFFF;
                                             border-radius: 25px;
@@ -60,214 +32,22 @@
                 <li>
                       <div class="item row">
                         <div class="col-md-15 p-2">
-                             <h4>{{ t.title }}</h4>
-                                <span>Category: <strong>{{ category_by_title.0.1 }}</strong></span>
-                                <span><strong>{{location}}</strong></span>
-                                <span> {{ JOB_SECTOR.1.1 }}</span>
-                             <p>Description: {{ t.description }}</p>
+                             <h4>{{ t.0 }}</h4>
+                                <span>Category: <strong>{{ t.1 }}</strong></span>
+                                <span><strong>{{ t.2 }}</strong></span>
+                             <p>Description: {{ t.3 }}</p>
                             <div class="accent-button button">
                                  <a href="#contact">Continue Reading</a>
                             </div>
                         </div>
                           <div class="col-md-15 pl-5">
-                          <img src="../static/images/person_1.jpg" style="border-radius: 25px; height: 200px" alt="">
+
                         </div>
                       </div>
                 </li>
             </ul>
         </div>
     {% endfor %}
-
-    <!-- Just Category -->
-    {% elif NoTitle and NoLocation and not NoCategory %}
-        {% for j in jobs %}
-            <div style="background-color:#FFFFFF;
-                                            border-radius: 25px;
-                                            width:750px" class="tab active p-4 ">
-                <ul>
-                    <li>
-                        <div class="item row">
-                            <div class="col-md-15 p-2">
-                                <h4>{{ j.title }}</h4>
-                                <span>> {{ category }}</span>
-                                <span><strong>{{ location }}</strong></span>
-                                <p>Description:<br/> {{ j.description }}</p>
-                                <div class="accent-button button">
-                                    <a href="#contact">Continue Reading</a>
-                                </div>
-                            </div>
-                            <div class="col-md-15 pl-5">
-                                <img src="../static/images/person_1.jpg" style="border-radius: 25px; height: 200px" alt="">
-                            </div>
-                      </div>
-                    </li>
-                </ul>
-            </div>
-        {% endfor %}
-
-    <!-- Just Location -->
-    {% elif NoTitle and NoCategory and not NoLocation %}
-        {% for j in jobs %}
-            <div style="background-color:#FFFFFF;
-                                            border-radius: 25px;
-                                            width:750px" class="tab active p-4 ">
-                <ul>
-                    <li>
-                        <div class="item row">
-                            <div class="col-md-15 p-2">
-                                <h4>{{ j.title }}</h4>
-                                <span>> {{ categories.0.1 }}</span>
-                                <span><strong>{{ location }}</strong></span>
-                                <p>Description:<br/> {{ j.description }}</p>
-                                <div class="accent-button button">
-                                    <a href="#contact">Continue Reading</a>
-                                </div>
-                            </div>
-                            <div class="col-md-15 pl-5">
-                                <img src="../static/images/person_1.jpg" style="border-radius: 25px; height: 200px" alt="">
-                            </div>
-                      </div>
-                    </li>
-                </ul>
-            </div>
-        {% endfor %}
-
-    <!-- Everything -->
-    {% elif not NoTitle and not NoCategory and not NotLocation%}
-        {% for j in jobs %}
-            <div style="background-color:#FFFFFF;
-                                            border-radius: 25px;
-                                            width:750px" class="tab active p-4 ">
-                <ul>
-                    <li>
-                        <div class="item row">
-                            <div class="col-md-15 p-2">
-                                <h4>{{ j.title }}</h4>
-                                <span>> {{ categories }}</span>
-                                <span><strong>{{ location }}</strong></span>
-                                <p>Description: {{ j.description }}</p>
-                                <div class="accent-button button">
-                                    <a href="#contact">Continue Reading</a>
-                                </div>
-                            </div>
-                            <div class="col-md-15 pl-5">
-                                <img src="../static/images/person_1.jpg" style="border-radius: 25px; height: 200px" alt="">
-                            </div>
-                      </div>
-                    </li>
-                </ul>
-            </div>
-            {% endfor %}
-
-    <!-- Both Title and Category -->
-    {% elif not NoTitle and not NoCategory and NotLocation%}
-        {% for j in jobs %}
-            <div style="background-color:#FFFFFF;
-                                            border-radius: 25px;
-                                            width:750px" class="tab active p-4 ">
-                <ul>
-                    <li>
-                        <div class="item row">
-                            <div class="col-md-15 p-2">
-                                <h4>{{ j.title }}</h4>
-                                <span>> {{ category }}</span>
-                                <span><strong>{{ locations.j.1 }}</strong></span>
-                                <p>Description: {{ j.description }}</p>
-                                <div class="accent-button button">
-                                    <a href="#contact">Continue Reading</a>
-                                </div>
-                            </div>
-                            <div class="col-md-15 pl-5">
-                                <img src="../static/images/person_1.jpg" style="border-radius: 25px; height: 200px" alt="">
-                            </div>
-                      </div>
-                    </li>
-                </ul>
-            </div>
-            {% endfor %}
-
-    <!-- Both Title and Location -->
-    {% elif not NoTitle and not NoLocation and NoCategory %}
-         {% for j in jobs %}
-            <div style="background-color:#FFFFFF;
-                                            border-radius: 25px;
-                                            width:750px" class="tab active p-4 ">
-                <ul>
-                    <li>
-                        <div class="item row">
-                            <div class="col-md-15 p-2">
-                                <h4>{{ j.title }}</h4>
-                                <span>> {{ categories.0 }}</span>
-                                <span><strong>{{ location }}</strong></span>
-                                <p>Description:<br/> {{ j.description }}</p>
-                                <div class="accent-button button">
-                                    <a href="#contact">Continue Reading</a>
-                                </div>
-                            </div>
-                            <div class="col-md-15 pl-5">
-                                <img src="../static/images/person_1.jpg" style="border-radius: 25px; height: 200px" alt="">
-                            </div>
-                      </div>
-                    </li>
-                </ul>
-            </div>
-        {% endfor %}
-
-    <!-- Both Category and Location -->
-    {% elif not NoCategory and not NoLocation and NoTitle %}
-         {% for j in jobs %}
-            <div style="background-color:#FFFFFF;
-                                            border-radius: 25px;
-                                            width:750px" class="tab active p-4 ">
-                <ul>
-                    <li>
-                        <div class="item row">
-                            <div class="col-md-15 p-2">
-                                <h4>{{ j.title }}</h4>
-                                <span>> {{ category }}</span>
-                                <span><strong>{{ location }}</strong></span>
-                                <p>Description:<br/> {{ j.description }}</p>
-                                <div class="accent-button button">
-                                    <a href="#contact">Continue Reading</a>
-                                </div>
-                            </div>
-                            <div class="col-md-15 pl-5">
-                                <img src="../static/images/person_1.jpg" style="border-radius: 25px; height: 200px" alt="">
-                            </div>
-                      </div>
-                    </li>
-                </ul>
-            </div>
-        {% endfor %}
-
-    <!-- Both Title and Location -->
-    {% elif NoCategory and not NoTitle and not NoLocation %}
-         {% for j in jobs %}
-            <div style="background-color:#FFFFFF;
-                                            border-radius: 25px;
-                                            width:750px" class="tab active p-4 ">
-                <ul>
-                    <li>
-                        <div class="item row">
-                            <div class="col-md-15 p-2">
-                                <h4>{{ j.title }}</h4>
-                                <span>> {{ category }}</span>
-                                <span><strong>{{ location }}</strong></span>
-                                <p>Description:<br/> {{ j.description }}</p>
-                                <div class="accent-button button">
-                                    <a href="#contact">Continue Reading</a>
-                                </div>
-                            </div>
-                            <div class="col-md-15 pl-5">
-                                <img src="../static/images/person_1.jpg" style="border-radius: 25px; height: 200px" alt="">
-                            </div>
-                      </div>
-                    </li>
-                </ul>
-            </div>
-        {% endfor %}
-
-    {% endif %}
         </section>
         </div>
         </div>

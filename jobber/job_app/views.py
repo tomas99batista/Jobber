@@ -46,15 +46,15 @@ def search_job(request):
     if title and not category and not location:
         logger.info("Only title")
         jobs = []
+        loc = []
         c = []
         titles = Emprego.objects.filter(title__contains=title)
         for t in titles:
-            c.append([t, JOB_SECTOR[int(t.job_sector) - 1][1]])
+            jobs.append([t.title, LOCATION[int(t.location-1)][1],JOB_SECTOR[int(t.job_sector) - 1][1], t.description])
             logger.info(t)
         params = {
             'title': title,
-            'jobs': titles,
-            'category_by_title': c,
+            'jobs': jobs,
             'error': False,
             'NoTitle': False,
             'NoCategory': True,
@@ -62,15 +62,16 @@ def search_job(request):
         }
 
         return render(request, "job_list.html", params)
+
     # CATEGORY
-    if category and not title and not location:
+    elif category and not title and not location:
         logger.info("Only category")
         jobs = []
         cat = JOB_SECTOR[int(category)-1][1]
         for e in Emprego.objects.all():
             logger.info(e.job_sector)
-            if e.job_sector == category:
-                jobs.append(e)
+            if str(e.job_sector) == category:
+                jobs.append([e.title, cat , LOCATION[int(e.location)][1], e.description])
 
         params = {
             'category': cat,
@@ -81,8 +82,9 @@ def search_job(request):
             'NoLocation': True
         }
         return render(request, "job_list.html", params)
+
     # LOCATION
-    if location and not title and not category:
+    elif location and not title and not category:
         logger.info("Only Location")
         jobs = []
         c = []
@@ -90,20 +92,14 @@ def search_job(request):
 
         for e in Emprego.objects.all():
             a = e.location
-            print("* " + str(a))
-            print("* " + location)
-            if str(e.location) == str(location):
-                jobs.append(e)
+            if str(e.location) == location:
+                logger.info(e)
+                jobs.append([e.title, JOB_SECTOR[int(e.job_sector)][1], loc, e.description])
 
-        logger.info(location + ": " + loc)
-
-        for l in jobs:
-            c.append([l, JOB_SECTOR[int(l.job_sector)-1][1]])
-
+        logger.info(jobs)
         params = {
             'jobs': jobs,
             'location': loc,
-            'categories': c,
             'error': False,
             'NoCategory': True,
             'NoTitle': True,
@@ -111,8 +107,9 @@ def search_job(request):
         }
 
         return render(request, "job_list.html", params)
+
     # TITLE && CATEGORY
-    if title and category and not location:
+    elif title and category and not location:
         categories = []
         jobs = []
         locations = []
@@ -123,30 +120,23 @@ def search_job(request):
         cat = JOB_SECTOR[int(category) - 1][1]
 
         # If job's category matches the request -> add to list
-        for e in Emprego.objects.all():
-            loc = e.location
-            if cat == e.job_sector:
-                categories.append(e)
-                locations.append(LOCATION[loc-1][1])
-        # Compare
-        for c in categories:
-            if c in titles:
-                jobs.append(c)
+        for e in titles:
+            if str(cat) == str(e.job_sector):
+                jobs.append([e.title, cat, LOCATION[int(e.location)][1], e.description])
 
         params = {
             'jobs': jobs,
             'title': title,
             'category': cat,
-            'locations' : locations,
-            'categories': categories,
             'error': False,
             'NoCategory': False,
             'NoTitle': False
         }
 
         return render(request, "job_list.html", params)
+
     # TITLE && LOCATION
-    if title and not category and location:
+    elif title and not category and location:
         categories = []
         jobs = []
         logger.info("Both title and location")
@@ -157,14 +147,12 @@ def search_job(request):
         for e in titles:
             c = e.job_sector
             if str(e.location) == str(location):
-                categories.append(JOB_SECTOR[int(c)-1][1])
-                jobs.append(e)
+                jobs.append([e.title,JOB_SECTOR[int(c)-1][1],loc,e.description])
         
         params = {
             'jobs': jobs,
             'title': title,
             'location': loc,
-            'categories': categories,
             'error': False,
             'NoCategory': True,
             'NoTitle': False,
@@ -172,17 +160,16 @@ def search_job(request):
         }
 
         return render(request, "job_list.html", params)
-    # CATEGORY && LOCATION
-    if not title and category and location:
-        jobs = []
-        logger.info("All")
 
+    # CATEGORY && LOCATION
+    elif not title and category and location:
+        jobs = []
         loc = LOCATION[int(location) - 1][1]
         cat = JOB_SECTOR[int(category)-1][1]
         
         for e in Emprego.objects.all():
-            if str(e.location) == str(location) and e.job_sector == category:
-                jobs.append(e)
+            if str(e.location) == str(location) and str(e.job_sector) == category:
+                jobs.append([e.title, cat, loc, e.description])
 
         params = {
             'jobs': jobs,
@@ -195,8 +182,9 @@ def search_job(request):
         }
 
         return render(request, "job_list.html", params)
-    #ALL
-    if title and category and location:
+
+    # ALL
+    elif title and category and location:
         jobs = []
         logger.info("Both category and location")
         titles = Emprego.objects.filter(title__contains=title)
@@ -205,8 +193,8 @@ def search_job(request):
         cat = JOB_SECTOR[int(category) - 1][1]
 
         for e in titles:
-            if str(e.location) == location and e.job_sector == category:
-                jobs.append(e)
+            if str(e.location) == location and str(e.job_sector) == category:
+                jobs.append([e.title, cat, loc, e.description])
 
         params = {
             'jobs': jobs,
@@ -220,20 +208,27 @@ def search_job(request):
         }
 
         return render(request, "job_list.html", params)
-        
+
     # NONE
     elif not title and not category and not location:
-        logger.error("ERROR: Nothing Found")
-        params = {
-            'error': True
-        }
-        return render(request, "index.html", params)
+        if request.method == "POST":
+            jobs = []
+            for e in Emprego.objects.all():
+                jobs.append([e.title, JOB_SECTOR[int(e.job_sector)][1], LOCATION[int(e.location)][1], e.description])
+            params = {
+                'jobs': jobs,
+                'NoTitle': True,
+                'NoCategory': True,
+                'NoLocation': True,
+                'error': False,
+            }
+            return render(request, "job_list.html", params)
 
-    elif not ('title' in request.POST) and not ('category' in request.POST) and not ('location' in request.POST):
-        params = {
-            'error': False
+
+    params = {
+        'error': False
         }
-        return render(request, "index.html", params)
+    return render(request, "index.html", params)
 
 
 def joblistview(request):
@@ -274,8 +269,8 @@ def register(request):
 def profile(request):
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
-        p_form = ProfileUpdateForm(request.POST, 
-                                    request.FILES, 
+        p_form = ProfileUpdateForm(request.POST,
+                                    request.FILES,
                                     instance=request.user)
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
