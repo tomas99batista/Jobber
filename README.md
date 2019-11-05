@@ -10,12 +10,15 @@ Jobber é um website para procurar e publicar ofertas de emprego.
 
 ### - Publicar ofertas de emprego (Necessita de estar registado e loggado)
 
-### - Procurar ofertas de emprego por:
+### - Procurar ofertas de emprego, filtrando por:
 
-    ## -> Título da oferta (Keyword, ex: "Frontend")
+     -> Título da oferta (Keyword, ex: "Frontend")
     
-    ## -> Setor da oferta (Finanças, Software Dev, Arts, etc)
+     -> Setor da oferta (Finanças, Software Dev, Arts, etc)
     
-    ## -> Localidade (Cidade da oferta de emprego)
+     -> Localidade (Cidade da oferta de emprego)
+     
+     -> Combinação de todos estes filtros anteriormente mencionados
+
 
 ### - É também possível ver todas as ofertas de emprego disponíveis no website
