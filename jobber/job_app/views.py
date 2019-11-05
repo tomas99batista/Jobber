@@ -1,13 +1,21 @@
 from django.middleware.csrf import logger
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+<<<<<<< Updated upstream
 from .models import User
 from .choices import JOB_SECTOR, LOCATION
 from .forms import URF
 from .forms import URF , UserUpdateForm, ProfileUpdateForm
 
+=======
+from .models import *
+
+from .models import Emprego
+from .choices import JOB_SECTOR, LOCATION
+from .forms import URF, UserUpdateForm, ProfileUpdateForm, Createjob
+>>>>>>> Stashed changes
 
 import logging
 
@@ -691,3 +699,12 @@ def profile(request):
         'p_form': p_form
     }
     return render(request, 'profile.html', context)
+
+
+def job_information(request, pk):
+    info = get_object_or_404(Emprego, id=pk)
+    if request.method == 'GET':
+        form = job_details()
+        details = Emprego.objects.get(id=pk)
+        args = {'inf' : info}
+        return render(request,"job_info.html", args)
