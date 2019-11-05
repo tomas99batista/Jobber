@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="mb-5" data-scrollax=" properties: { translateY: '70%' }">
+        <div class="container " >
+            <p class="mb-5 mt-5 pt-5" data-scrollax="properties: { translateY: '30%', opacity: 1.6 } ">
+                <h5 style="color:#FFFFFF">RESULTS FOR:
+                    {% if not NoTitle %}
+                        <strong>"{{ title }}"</strong>
+                    {% endif %}
+                    {% if not NoTitle and not NoCategory%}
+                        in
+                    {% endif %}
+                    {% if not NoCategory %}
+                        <strong>{{ category }}</strong>
+                    {% endif %}
+                    {% if not NoLocation %}
+                        {% if not NoCategory or not NoTitle %}
+                            at
+                        {% endif %}
+                        <strong>{{ location }}</strong>
+                    {% endif %}
+                </h5>
+            </p>
+    <section id="first-tab-group" class="tabgroup">
+    {% if NoCategory %}
+        {% for t in jobs %}
+        <div style="background-color:#FFFFFF;
+                                            border-radius: 25px;
+                                            width:750px" class="tab active p-4 ">
+            <ul>
+                <li>
+                      <div class="item row">
+                        <div class="col-md-15 p-2">
+                             <h4>{{ t.title }}</h4>
+                                <span>Category: <strong>{{ category_by_title.0.1 }}</strong></span>
+                                <span><strong>{{location}}</strong></span>
+                                <span> {{ JOB_SECTOR.1.1 }}</span>
+                             <p>Description: {{ t.description }}</p>
+                            <div class="accent-button button">
+                                 <a href="#contact">Continue Reading</a>
+                            </div>
+                        </div>
+                          <div class="col-md-15 pl-5">
+                          <img src="../static/images/person_1.jpg" style="border-radius: 25px; height: 200px" alt="">
+                        </div>
+                      </div>
+                </li>
+            </ul>
+        </div>
+    {% endfor %}
+    {% elif NoTitle %}
+        {% for j in jobs %}
+            <div style="background-color:#FFFFFF;
+                                            border-radius: 25px;
+                                            width:750px" class="tab active p-4 ">
+                <ul>
+                    <li>
+                        <div class="item row">
+                            <div class="col-md-15 p-2">
+                                <h4>{{ j.title }}</h4>
+                                <span>> {{ category }}</span>
+                                <span><strong>{{ location }}</strong></span>
+                                <p>Description:<br/> {{ j.description }}</p>
+                                <div class="accent-button button">
+                                    <a href="#contact">Continue Reading</a>
+                                </div>
+                            </div>
+                            <div class="col-md-15 pl-5">
+                                <img src="../static/images/person_1.jpg" style="border-radius: 25px; height: 200px" alt="">
+                            </div>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        {% endfor %}
+    {% elif not NoTitle and not NoCategory and not NotLocation%}
+        {% for j in jobs %}
+            <div style="background-color:#FFFFFF;
+                                            border-radius: 25px;
+                                            width:750px" class="tab active p-4 ">
+                <ul>
+                    <li>
+                        <div class="item row">
+                            <div class="col-md-15 p-2">
+                                <h4>{{ j.title }}</h4>
+                                <span>> {{ category }}</span>
+                                <span><strong>{{ location }}</strong></span>
+                                <p>Description: {{ j.description }}</p>
+                                <div class="accent-button button">
+                                    <a href="#contact">Continue Reading</a>
+                                </div>
+                            </div>
+                            <div class="col-md-15 pl-5">
+                                <img src="../static/images/person_1.jpg" style="border-radius: 25px; height: 200px" alt="">
+                            </div>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+            {% endfor %}
+        {% elif not NoTitle and not NoCategory and NotLocation%}
+        {% for j in jobs %}
+            <div style="background-color:#FFFFFF;
+                                            border-radius: 25px;
+                                            width:750px" class="tab active p-4 ">
+                <ul>
+                    <li>
+                        <div class="item row">
+                            <div class="col-md-15 p-2">
+                                <h4>{{ j.title }}</h4>
+                                <span>> {{ category }}</span>
+                                <span><strong>{{ locations.j.1 }}</strong></span>
+                                <p>Description: {{ j.description }}</p>
+                                <div class="accent-button button">
+                                    <a href="#contact">Continue Reading</a>
+                                </div>
+                            </div>
+                            <div class="col-md-15 pl-5">
+                                <img src="../static/images/person_1.jpg" style="border-radius: 25px; height: 200px" alt="">
+                            </div>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+            {% endfor %}
+        {% endif %}
+        </section>
+        </div>
+        </div>
+    </div>
+
+</body>
+</html>
+{% endblock content %}

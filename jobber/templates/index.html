@@ -1,0 +1,232 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="hero-wrap js-fullheight" style="background-image: url('../static/images/bg_2.jpg');" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
+          <div class="col-xl-10 ftco-animate mb-5 pb-5" data-scrollax=" properties: { translateY: '70%' }">
+          	<p class="mb-4 mt-5 pt-5" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">We have <span class="number" data-number="850000">0</span> great job offers you deserve!</p>
+            <h1 class="mb-5" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Your Dream <br><span>Job is Waiting</span></h1>
+
+						<div class="ftco-search">
+							<div class="row">
+		            <div class="col-md-12 nav-link-wrap">
+			            <div class="nav nav-pills text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+			              <a class="nav-link active mr-md-1" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Find a Job</a>
+
+			              <a class="nav-link" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">Find a Candidate</a>
+
+			            </div>
+			          </div>
+			          <div class="col-md-12 tab-wrap">
+			            <div class="tab-content p-4" id="v-pills-tabContent">
+
+			              <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
+
+                                  {% if error %}
+                                      <div class="row col-md-3">
+                                        <p style="font-weight: 900; color: #000000">ERROR: No input</p>
+                                      </div>
+                                  {% endif %}
+			              	<form action="#" method="post" class="search-job">
+			              		<div class="row">
+			              			<div class="col-md">
+			              				<div class="form-group">
+				              				<div class="form-field">
+				              					<div class="icon"><span class="icon-briefcase"></span></div>
+                                                {%  csrf_token %}
+								                <input type="text" name="title" class="form-control" placeholder="eg. Garphic. Web Developer">
+
+								              </div>
+							              </div>
+			              			</div>
+			              			<div class="col-md">
+			              				<div class="form-group">
+			              					<div class="form-field">
+				              					<div class="select-wrap">
+                                                    {%  csrf_token %}
+						                      <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+
+						                      <select name="category" id="" class="form-control">
+                                                  <option value=0>Category</option>
+                                                  <option value=1>Software Development</option>
+                                                  <option value=2>Analyst</option>
+                                                  <option value=3>Project Management</option>
+                                                  <option value=4>Sales</option>
+                                                  <option value=5>Administrative</option>
+                                                  <option value=6>Finance</option>
+                                                  <option value=7>Art/Design</option>
+                                                  <option value=8>Human Resources</option>
+                                                  <option value=9>Medical/Healthcare</option>
+                                                  <option value=10>Cashier</option>
+						                      </select>
+						                    </div>
+								              </div>
+							              </div>
+			              			</div>
+			              			<div class="col-md">
+			              				<div class="form-group">
+			              					<div class="form-field">
+				              					<div class="icon"><span class="icon-map-marker"></span></div>
+												{%  csrf_token %}
+												<select name="location" id="" class="form-control">
+													<option value="0">Location</option>
+						                      		<option value="1">Aveiro</option>
+						                      		<option value="2">Viseu</option>
+						                        	<option value="3">Porto</option>
+						                        	<option value="4">Guarda</option>
+						                        	<option value="5">Bragança</option>
+						                        	<option value="6">Vila Real</option>
+                                                	<option value="7">Braga</option>
+						                        	<option value="8">Viana do Castelo</option>
+						                        	<option value="9">Coimbra</option>
+						                        	<option value="10">Castelo Branco</option>
+						                        	<option value="11">Leiria</option>
+                                                	<option value="12">Santarém</option>
+						                        	<option value="13">Portalegre</option>
+						                        	<option value="14">Lisboa</option>
+						                        	<option value="15">Évora</option>
+                                                	<option value="16">Setubal</option>
+						                        	<option value="17">Beja</option>
+						                        	<option value="18">Faro</option>
+						                      	</select>
+								              </div>
+							              </div>
+			              			</div>
+			              			<div class="col-md">
+			              				<div class="form-group">
+			              					<div class="form-field">
+								                <input type="submit" value="Search" class="form-control btn btn-primary">
+								              </div>
+							              </div>
+			              			</div>
+			              		</div>
+			              	</form>
+			              </div>
+
+			              <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-performance-tab">
+			              	<form action="#" class="search-job">
+			              		<div class="row">
+			              			<div class="col-md">
+			              				<div class="form-group">
+				              				<div class="form-field">
+				              					<div class="icon"><span class="icon-user"></span></div>
+								                <input type="text" class="form-control" placeholder="eg. Adam Scott">
+								              </div>
+							              </div>
+			              			</div>
+			              			<div class="col-md">
+			              				<div class="form-group">
+			              					<div class="form-field">
+				              					<div class="select-wrap">
+						                      <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+						                      <select name="" id="" class="form-control">
+						                      	<option value="">Software Development</option>
+						                      	<option value="">Analyst</option>
+						                        <option value="">Project Management</option>
+						                        <option value="">Sales</option>
+						                        <option value="">Administrative</option>
+						                        <option value="">Finance</option>
+                                                <option value="">Art/Design</option>
+                                                <option value="">Human Resources</option>
+                                                <option value="">Medical/Healthcare</option>
+                                                <option value="">Cashier</option>
+						                      </select>
+						                    </div>
+								              </div>
+							              </div>
+			              			</div>
+			              			<div class="col-md">
+			              				<div class="form-group">
+			              					<div class="form-field">
+				              					<div class="icon"><span class="ion-ios-arrow-down"></span></div>
+						                      <select name="" id="" class="form-control">
+						                      	<option value="">Aveiro</option>
+						                      	<option value="">Viseu</option>
+						                        <option value="">Porto</option>
+						                        <option value="">Guarda</option>
+						                        <option value="">Bragança</option>
+						                        <option value="">Vila Real</option>
+                                                <option value="">Braga</option>
+						                        <option value="">Viana do Castelo</option>
+						                        <option value="">Coimbra</option>
+						                        <option value="">Castelo Branco</option>
+						                        <option value="">Leiria</option>
+                                                <option value="">Santarém</option>
+						                        <option value="">Portalegre</option>
+						                        <option value="">Lisboa</option>
+						                        <option value="">Évora</option>
+                                                <option value="">Setubal</option>
+						                        <option value="">Beja</option>
+						                        <option value="">Faro</option>
+						                      </select>
+                                                </div>
+								              </div>
+							              </div>
+			              			</div>
+			              			<div class="col-md">
+                                        <br>
+			              				<div class="form-group">
+			              					<div class="form-field">
+								                <input type="submit" value="Search" class="form-control btn btn-primary">
+								              </div>
+							              </div>
+			              			</div>
+			              		</div>
+			              	</form>
+			              </div>
+			            </div>
+			          </div>
+			        </div>
+		        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="ftco-section services-section bg-light">
+      <div class="container">
+        <div class="row d-flex">
+          <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services d-block">
+              <div class="icon"><span class="flaticon-resume"></span></div>
+              <div class="media-body">
+                <h3 class="heading mb-3">Search Millions of Jobs</h3>
+                <p>An almost unlimited number of offers</p>
+              </div>
+            </div>      
+          </div>
+          <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services d-block">
+              <div class="icon"><span class="flaticon-collaboration"></span></div>
+              <div class="media-body">
+                <h3 class="heading mb-3">Easy To Manage Jobs</h3>
+                <p>Search by your preferences!</p>
+              </div>
+            </div>    
+          </div>
+          <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services d-block">
+              <div class="icon"><span class="flaticon-promotions"></span></div>
+              <div class="media-body">
+                <h3 class="heading mb-3">Top Careers</h3>
+                <p>Just like a success factory</p>
+              </div>
+            </div>      
+          </div>
+          <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services d-block">
+              <div class="icon"><span class="flaticon-employee"></span></div>
+              <div class="media-body">
+                <h3 class="heading mb-3">Search Expert Candidates</h3>
+                <p>Get the best employees there is</p>
+              </div>
+            </div>      
+          </div>
+        </div>
+      </div>
+    </section>
+{% endblock content %}
+

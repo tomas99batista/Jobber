@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="container" style="margin-top: 110px; margin-bottom: 20px; background: #f2f2f2;border-radius: 20px;">
+    <form action="" method="post" enctype="multipart/form-data" style="padding: 15px">
+        {% csrf_token %}
+        <h1>Create a job</h1>
+        {{ form|crispy }}
+   <input type="button" class="btn btn-secondary btn-lg" value="Cancel" data-toggle="modal" data-target="#exampleModal">
+   <input type="button" class="btn btn-success btn-lg" style="float: right" value="Create" data-toggle="modal" data-target="#exampleModal2">
+   <div>
+       <br>
+   </div>
+
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Caution!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        You are about to dismiss all changes, are you sure?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <a href="{% url "index" %}" type="button" class="btn btn-danger">Dismiss</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+        <!-- Modal -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Job Creation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        You are about to publish a job entry, are you sure?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+        </form>
+
+    </div>
+{% endblock content %}
