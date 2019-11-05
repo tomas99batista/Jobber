@@ -50,7 +50,7 @@ def search_job(request):
         c = []
         titles = Emprego.objects.filter(title__contains=title)
         for t in titles:
-            jobs.append([t.title, LOCATION[int(t.location-1)][1],JOB_SECTOR[int(t.job_sector) - 1][1], t.description])
+            jobs.append([t.title, JOB_SECTOR[int(t.job_sector) - 1][1],LOCATION[int(t.location-1)][1],t.description])
             logger.info(t)
         params = {
             'title': title,
@@ -71,7 +71,7 @@ def search_job(request):
         for e in Emprego.objects.all():
             logger.info(e.job_sector)
             if str(e.job_sector) == category:
-                jobs.append([e.title, cat , LOCATION[int(e.location)][1], e.description])
+                jobs.append([e.title, cat , LOCATION[int(e.location)-1][1], e.description])
 
         params = {
             'category': cat,
@@ -94,7 +94,7 @@ def search_job(request):
             a = e.location
             if str(e.location) == location:
                 logger.info(e)
-                jobs.append([e.title, JOB_SECTOR[int(e.job_sector)][1], loc, e.description])
+                jobs.append([e.title, JOB_SECTOR[int(e.job_sector)-1][1], loc, e.description])
 
         logger.info(jobs)
         params = {
