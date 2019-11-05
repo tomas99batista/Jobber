@@ -122,13 +122,14 @@ def search_job(request):
         # If job's category matches the request -> add to list
         for e in titles:
             if str(cat) == str(e.job_sector):
-                jobs.append([e.title, cat, LOCATION[int(e.location)][1], e.description])
+                jobs.append([e.title, cat, LOCATION[int(e.location)-1][1], e.description])
 
         params = {
             'jobs': jobs,
             'title': title,
             'category': cat,
             'error': False,
+            'NoLocation':True,
             'NoCategory': False,
             'NoTitle': False
         }
@@ -214,16 +215,16 @@ def search_job(request):
         if request.method == "POST":
             jobs = []
             for e in Emprego.objects.all():
-                jobs.append([e.title, JOB_SECTOR[int(e.job_sector)][1], LOCATION[int(e.location)][1], e.description])
+                jobs.append([e.title, JOB_SECTOR[int(e.job_sector)-1][1], LOCATION[int(e.location)-1][1], e.description])
             params = {
+                'title': "ALL",
                 'jobs': jobs,
-                'NoTitle': True,
+                'NoTitle': False,
                 'NoCategory': True,
                 'NoLocation': True,
                 'error': False,
             }
             return render(request, "job_list.html", params)
-
 
     params = {
         'error': False

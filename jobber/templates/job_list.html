@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="mb-5" data-scrollax=" properties: { translateY: '70%' }">
-        <div class="container" style = "margin-bottom: 100px"  >
+        <div class="container" style = "padding: 50px"  >
             <p class="mb-5 mt-5 pt-5" data-scrollax="properties: { translateY: '30%', opacity: 1.6 } ">
                 <h5 style="color:#FFFFFF">RESULTS FOR:
                     {% if not NoTitle %}
@@ -13,29 +13,31 @@
                     {% if not NoCategory %}
                         <strong>{{ category }}</strong>
                     {% endif %}
-                    {% if not NoLocation %}
-                        {% if not NoCategory or not NoTitle %}
+                    {% if not NoCategory or not NoTitle %}
+                        {% if not NoLocation %}
                             at
                         {% endif %}
+                    {% endif %}
+                    {% if not NoLocation %}
                         <strong>{{ location }}</strong>
                     {% endif %}
                 </h5>
             </p>
-    <section id="first-tab-group" class="tabgroup">
+    <section id="first-tab-group" class="tabgroup" >
 
 
         {% for t in jobs %}
         <div style="background-color:#FFFFFF;
-                                            border-radius: 25px;
-                                            width:750px" class="tab active p-4 ">
-            <ul>
-                <li>
-                      <div class="item row">
+                    border-radius: 25px;
+                    width:750px;
+                    margin-bottom: 15px;" class="tab active p-4 ">
+
+                      <div class="item row" style="margin:20px" >
                         <div class="col-md-15 p-2">
-                             <h4>{{ t.0 }}</h4>
-                                <span>Category: <strong>{{ t.1 }}</strong></span>
-                                <span><strong>{{ t.2 }}</strong></span>
-                             <p>Description: {{ t.3 }}</p>
+                            <h4><strong>{{ t.0 }}</strong></h4>
+                                <span>Job Sector: <strong>{{ t.1 }}</strong></span>
+                            <span><p>Location: <strong>{{ t.2 }}</strong></p></span>
+                                <p>Description: {{ t.3 }}</p>
                             <div class="accent-button button">
                                  <a href="#contact">Continue Reading</a>
                             </div>
@@ -44,8 +46,7 @@
 
                         </div>
                       </div>
-                </li>
-            </ul>
+
         </div>
     {% endfor %}
         </section>
