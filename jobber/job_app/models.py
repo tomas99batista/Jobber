@@ -6,6 +6,7 @@ from .choices import *
 
 
 class Utilizador(models.Model):
+    id = models.AutoField(primary_key=True)  # Id_autogerated
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     # Details
     first_name = models.CharField(max_length=70)
@@ -24,6 +25,7 @@ class Utilizador(models.Model):
 
 
 class Empresa(models.Model):
+    id = models.AutoField(primary_key=True)  # Id_autogerated
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     # Details
     first_name = models.CharField(max_length=70)
@@ -44,7 +46,7 @@ class Emprego(models.Model):
     title = models.CharField(max_length=70)
     description = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
-    publisher = models.ForeignKey(Empresa, on_delete=models.CASCADE)
+    publisher = models.CharField(max_length=20, blank=True)
     location = models.IntegerField(choices=LOCATION)  # Pode ser Remote, no Local da empresa ou noutra sede ou sth else
     # Professional Details
     job_sector = models.IntegerField(choices=JOB_SECTOR)  # IT, Economy
