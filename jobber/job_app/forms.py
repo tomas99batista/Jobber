@@ -40,4 +40,4 @@ class ProfileUpdateForm(forms.ModelForm):
 class job_details(forms.ModelForm):
     class Meta:
         model = Emprego
-        fields = ['title','job_sector','location','experience_level','description']
+        fields = ['title','job_sector','location','description']
