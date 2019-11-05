@@ -2,7 +2,9 @@ from django import forms
 from django.forms import ModelForm
 from django.contrib.auth.models import User as us
 from django.contrib.auth.forms import UserCreationForm
-from job_app.models import *
+from .models import *
+
+from .models import Utilizador, Emprego
 from .choices import *
 
 
@@ -34,3 +36,8 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Utilizador
         fields = ['phone', 'city', 'website', 'b_date', 'curriculum']
+
+class job_details(forms.ModelForm):
+    class Meta:
+        model = Emprego
+        fields = ['title','job_sector','location','experience_level','description']
