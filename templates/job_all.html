@@ -3,23 +3,9 @@
     <div class="mb-5" data-scrollax=" properties: { translateY: '70%' }">
         <div class="container" style = "padding: 50px"  >
             <p class="mb-5 mt-5 pt-5" data-scrollax="properties: { translateY: '30%', opacity: 1.6 } ">
-                <h3 style="color:#FFFFFF">RESULTS FOR:
-                    {% if not NoTitle %}
-                        <strong>"{{ title }}"</strong>
-                    {% endif %}
-                    {% if not NoTitle and not NoCategory%}
-                        in
-                    {% endif %}
-                    {% if not NoCategory %}
-                        <strong>{{ category }}</strong>
-                    {% endif %}
-                    {% if not NoCategory or not NoTitle %}
-                        {% if not NoLocation %}
-                            at
-                        {% endif %}
-                    {% endif %}
-                    {% if not NoLocation %}
-                        <strong>{{ location }}</strong>
+                <h3 style="color:#FFFFFF">All Job Offers:
+                    {% if not jobs %}
+                        <strong>No job offers</strong>            
                     {% endif %}
                 </h3>
             </p>

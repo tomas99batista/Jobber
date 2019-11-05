@@ -3,7 +3,7 @@ from django.urls import path
 
 from job_app import views
 from jobber import settings
-from .views import *
+from job_app.views import *
 from django.conf.urls.static import static
 import django.contrib.staticfiles
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns

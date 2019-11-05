@@ -233,7 +233,19 @@ def search_job(request):
 
 
 def joblistview(request):
-    return render(request, 'job_list.html')
+        jobs = []
+        logger.info("Both category and location")
+        j = Emprego.objects.all()
+
+        for e in j:
+            loc = LOCATION[int(e.location) - 1][1]
+            cat = JOB_SECTOR[int(e.job_sector) - 1][1]
+            jobs.append([e.title, cat, loc, e.description])
+
+        params = {
+            'jobs': jobs,
+        }
+        return render(request, 'job_all.html', params)
 
 
 def jobcreateview(request):
