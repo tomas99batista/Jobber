@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from .models import User
+from .models import User, Empresa
 from .choices import JOB_SECTOR, LOCATION
 from .forms import URF
 from .forms import URF , UserUpdateForm, ProfileUpdateForm
@@ -245,8 +245,13 @@ def jobcreateview(request):
         form = Createjob(request.POST)
         if form.is_valid():
             # The POST request is already working, we just need the model to be finalize so we can start populating the database
-            job_info = form.cleaned_data.get('job_sector')
-            print(job_info)
+            t = form.cleaned_data.get('title')
+            job_sec = form.cleaned_data.get('job_sector')
+            loc = form.cleaned_data.get('location')
+            descript = form.cleaned_data.get('description')
+            f = form.cleaned_data.get('file')
+            new_job = Emprego.objects.create(title=t, job_sector=job_sec, location=loc, description=descript, file=f, publisher="Empresa")
+
     else:
         form = Createjob()
     return render(request, 'job_create.html', {'form': form})
@@ -302,11 +307,3 @@ def viewEmpregos(request):
         'ALL': True
     }
     render(request,'job_list.html',params)
-
-def job_information(request, pk):
-    info = get_object_or_404(Emprego, id=pk)
-    if request.method == 'GET':
-        form = job_details()
-        details = Emprego.objects.get(id=pk)
-        args = {'inf' : info}
-        return render(request,"job_info.html", args)

@@ -13,5 +13,4 @@ urlpatterns = [
     path('', views.search_job, name='index'),
     path('job_list/', joblistview,name='job_list'),
     path('job_create/', jobcreateview, name="job_create"),
-    url('job_info/(?P<pk>.+)', job_information, name="job_info")
 ]
