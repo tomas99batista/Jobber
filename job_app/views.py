@@ -233,19 +233,9 @@ def search_job(request):
 
 
 def joblistview(request):
-        jobs = []
-        logger.info("Both category and location")
-        j = Emprego.objects.all()
-
-        for e in j:
-            loc = LOCATION[int(e.location) - 1][1]
-            cat = JOB_SECTOR[int(e.job_sector) - 1][1]
-            jobs.append([e.title, cat, loc, e.description])
-
-        params = {
-            'jobs': jobs,
-        }
-        return render(request, 'job_all.html', params)
+        return render(request, 'job_all.html', {'jobs' : [[e.title, LOCATION[int(e.location) - 1][1], \
+                                                            JOB_SECTOR[int(e.job_sector) - 1][1], e.description] \
+                                                            for e in Emprego.objects.all() if True]})
 
 
 def jobcreateview(request):
@@ -297,7 +287,7 @@ def profile(request):
     context = {
         'u_form': u_form,
         'p_form': p_form,
-        'utilizador': Utilizador
+        'utilizador': Utilizador.objects.filter(user=request.user)
     }
     return render(request, 'profile.html', context)
 
