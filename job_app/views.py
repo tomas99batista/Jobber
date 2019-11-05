@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from .models import User, Empresa
+from .models import Utilizador, Empresa
 from .choices import JOB_SECTOR, LOCATION
 from .forms import URF
 from .forms import URF , UserUpdateForm, ProfileUpdateForm
@@ -284,7 +284,8 @@ def profile(request):
         p_form = ProfileUpdateForm(instance=request.user)
     context = {
         'u_form': u_form,
-        'p_form': p_form
+        'p_form': p_form,
+        'utilizador': Utilizador
     }
     return render(request, 'profile.html', context)
 
