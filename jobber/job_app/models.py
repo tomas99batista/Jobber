@@ -48,7 +48,6 @@ class Emprego(models.Model):
     location = models.IntegerField(choices=LOCATION)  # Pode ser Remote, no Local da empresa ou noutra sede ou sth else
     # Professional Details
     job_sector = models.IntegerField(choices=JOB_SECTOR)  # IT, Economy
-    location = models.IntegerField(choices=LOCATION)    # Professional Details
     file = models.FileField(blank=True)  # Can post a PDF with more details of the job, but it's totally optional
 
     def __str__(self):

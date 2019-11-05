@@ -20,8 +20,8 @@ class Createjob(forms.Form):
     title = forms.CharField()
     job_sector = forms.ChoiceField(choices=JOB_SECTOR, initial='1', required=True)
     location = forms.ChoiceField(choices=LOCATION, required=True)
-    experience_level = forms.ChoiceField(choices=EXPERIENCE_LEVEL, required=True)
     description = forms.CharField(widget=forms.Textarea)
+    file = forms.FileField(required=True)
 
 
 class UserUpdateForm(forms.ModelForm):
