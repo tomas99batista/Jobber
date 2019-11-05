@@ -5,23 +5,20 @@
 {% block content %}
 <div class="container" style="margin-top: 110px; margin-bottom: 20px; background: #f2f2f2;border-radius: 20px;">
     <div class="content-section">
-        
-        <center>
-        <br><h3>Profile of {{ user.username }}</h3>
-        <h3>{{ user.email }}</h3>
-        </center>
-
-        <br>First Name: {{ u_form.first_name }}
-        <br>Last Name: {{ u_form.last_name }}
-        <br>Birth Date: {{ p_form.b_date }}
-        <br>Phone: {{ p_form.phone }}
-        <br>City: {{ p_form.city }}
-        <br>Website: {{ p_form.website }}
-        
+    <br>
+        <div class="container" style="margin-top: 0px; margin-bottom: 20px; background: white;border-radius: 20px; width: 100%; padding-bottom: 15px; padding-top: 7px;">
+        <h1>{{user.username}}'s info:</h1>
+            <div>First Name:</div>{{ u_form.first_name }}
+        <div>Last Name: </div>{{ u_form.last_name }}
+        <div>Birth Date:</div>{{ p_form.b_date }}
+        <div>Phone:</div>{{ p_form.phone }}
+        <div>City:</div>{{ p_form.city }}
+        <div>Website:</div>{{ p_form.website }}
+            </div>
     </div>
     <div class="content-section">
         <form method='post' enctype="multipart/form-data" style="padding: 15px">
-            <h1>Edit Profile</h1>
+            <h1>Edit Info</h1>
             {% csrf_token %}
                 {{ u_form|crispy }}
                 {{ p_form|crispy }}
