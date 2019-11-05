@@ -284,10 +284,10 @@ def profile(request):
     else:
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user)
+        print(p_form)
     context = {
         'u_form': u_form,
         'p_form': p_form,
-        'utilizador': Utilizador.objects.filter(user=request.user)
     }
     return render(request, 'profile.html', context)
 

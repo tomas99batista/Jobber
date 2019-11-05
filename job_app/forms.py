@@ -11,6 +11,8 @@ from .choices import *
 class URF(UserCreationForm):
     email = forms.EmailField()
 
+    def return_instance(self):
+        return us
     class Meta:
         model = us
         fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']

@@ -23,6 +23,10 @@ class Utilizador(models.Model):
     def __str__(self):
         return f'{self.user.username} Profile'
 
+    def save(self):
+        super().save()
+
+
 
 class Empresa(models.Model):
     id = models.AutoField(primary_key=True)  # Id_autogerated
