@@ -87,8 +87,12 @@ def search_job(request):
         jobs = []
         c = []
         loc = LOCATION[int(location)-1][1]
+
         for e in Emprego.objects.all():
-            if e.location == location:
+            a = e.location
+            print("* " + str(a))
+            print("* " + location)
+            if str(e.location) == str(location):
                 jobs.append(e)
 
         logger.info(location + ": " + loc)
@@ -152,7 +156,7 @@ def search_job(request):
         
         for e in titles:
             c = e.job_sector
-            if e.location == location:
+            if str(e.location) == str(location):
                 categories.append(JOB_SECTOR[int(c)-1][1])
                 jobs.append(e)
         
@@ -177,7 +181,7 @@ def search_job(request):
         cat = JOB_SECTOR[int(category)-1][1]
         
         for e in Emprego.objects.all():
-            if e.location == location and e.job_sector == category:
+            if str(e.location) == str(location) and e.job_sector == category:
                 jobs.append(e)
 
         params = {
@@ -201,12 +205,12 @@ def search_job(request):
         cat = JOB_SECTOR[int(category) - 1][1]
 
         for e in titles:
-            if e.location == location and e.job_sector == category:
+            if str(e.location) == location and e.job_sector == category:
                 jobs.append(e)
 
         params = {
             'jobs': jobs,
-            'title':title,
+            'title': title,
             'location': loc,
             'category': cat,
             'error': False,
@@ -283,6 +287,21 @@ def profile(request):
     }
     return render(request, 'profile.html', context)
 
+def viewEmpregos(request):
+    jobs = Emprego.objects.all()
+    categories = []
+    locations = []
+    for job in jobs:
+        categories.append(JOB_SECTOR[(job.job_sector-1)][1])
+        locations.append(LOCATION[job.location-1][1])
+
+
+    params = {
+        'empregos' : Emprego.objects.all(),
+        'categories' : categories,
+        'ALL': True
+    }
+    render(request,'job_list.html',params)
 
 def job_information(request, pk):
     info = get_object_or_404(Emprego, id=pk)
