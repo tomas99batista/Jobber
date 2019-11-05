@@ -45,10 +45,9 @@ class Emprego(models.Model):
     description = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
     publisher = models.ForeignKey(Empresa, on_delete=models.CASCADE)
-    location = models.IntegerField(choices=LOCATION,
-                                   default=1)  # Pode ser Remote, no Local da empresa ou noutra sede ou sth else
+    location = models.IntegerField(choices=LOCATION)  # Pode ser Remote, no Local da empresa ou noutra sede ou sth else
     # Professional Details
-    job_sector = models.CharField(choices=JOB_SECTOR, max_length=50)  # IT, Economy
+    job_sector = models.IntegerField(choices=JOB_SECTOR, max_length=50)  # IT, Economy
     file = models.FileField(blank=True)  # Can post a PDF with more details of the job, but it's totally optional
 
     def __str__(self):
