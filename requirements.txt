@@ -1,4 +1,4 @@
-Django==2.2.6
+Django==2.2.22
 crispy-forms-semantic-ui>=0.2.0 # added to ease up testing of semantic ui templates
 django-crispy-forms>=1.7.2      # Use pip install -e ../django-crispy-forms for local dev
 gunicorn>=19.9.0
